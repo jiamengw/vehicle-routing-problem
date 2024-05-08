@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>hello</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+      <p> <a th:href="@{'/user/planningRoute'}">规划路线</a></p>
+       
+<table id="tab" cellpadding="1" cellspacing="1" border="1" th:if="${routs}!= null and ${#arrays.length(routs)} > 0">
+    <thead>
+        <tr><th rowspan="3">方案</th></tr>
+        <tr>   
+            <th rowspan="2">线路名</th>
+            <th colspan="6">用户</th>
+        </tr>
+        <tr>   
+            <th>序号</th>
+            <th>id</th>
+            <th>用户</th>
+            <th>地址</th>
+            <th>距离</th>
+            <th>时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="rout,routStat : ${routs}" th:with="routIndex=${routStat.index}">
+             <tr>
+                <td th:text="${rout}"></td>
+                <th rowspan="${#arrays.length(rout.paths)" th:text="'方案'+${routIndex}+'(fitness:'+${rout.fitness}+')'">方案一</th>
+            </tr>
+           <tr th:each="path,pathStat : ${rout.paths}" th:with="pathIndex=${pathStat.index}">
+                <tr>
+                    <th rowspan="${#arrays.length(path.nodeList)" th:text="'线路'+${pathIndex}+'(载重：'+${path.demands}+',时间：'+${path.duration}+')'">线路1</th>
+                </tr>
+                <tr th:each="node,nodeStat : ${path.nodeList}" th:with="nodeIndex=${nodeStat.index}">
+                    <tr>
+                        <td th:text="${nodeStat.nodeIndex}">1</td>
+                        <td th:text="${node.id}">id</td>
+                        <td th:text="${node.name}">张三</td>
+                        <td th:text="${node.addressDetail}">北京</td>
+                        <td th:text="${node.distance}">北京</td>
+                        <td th:text="${node.duration}">北京</td>
+                    </tr>
+                </tr>
+            </tr>
+        </tr>
+    </tbody>
+    </table>
+    </body>
+</html>

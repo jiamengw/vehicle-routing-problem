@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: VehicleRoutingProblem
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.22.176.2:3306/bee-demo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 172.22.176.2
+      port: 6379
+
+server:
+  port: 8088
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml

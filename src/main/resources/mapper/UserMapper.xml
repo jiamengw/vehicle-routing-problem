@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="line_id" jdbcType="VARCHAR" property="lineId" />
+    <result column="line_sort" jdbcType="INTEGER" property="lineSort" />
+    <result column="delivery_time" jdbcType="VARCHAR" property="deliveryTime" />
+    <result column="distance" jdbcType="DECIMAL" property="distance" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, province, city, area, address_detail, longitude, latitude, line_id, line_sort, 
+    delivery_time, distance, duration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    limit 100
+  </select>
+  <select id="ownerLocation" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where longitude &gt; 0
+    and latitude &gt; 0
+    limit #{pageSize,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.User">
+    insert into user (id, name, province, 
+      city, area, address_detail, 
+      longitude, latitude, line_id, 
+      line_sort, delivery_time, distance, 
+      duration)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{lineId,jdbcType=VARCHAR}, 
+      #{lineSort,jdbcType=INTEGER}, #{deliveryTime,jdbcType=VARCHAR}, #{distance,jdbcType=DECIMAL}, 
+      #{duration,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="lineId != null">
+        line_id,
+      </if>
+      <if test="lineSort != null">
+        line_sort,
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time,
+      </if>
+      <if test="distance != null">
+        distance,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="lineId != null">
+        #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="lineSort != null">
+        #{lineSort,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryTime != null">
+        #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=DECIMAL},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="lineSort != null">
+        line_sort = #{lineSort,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        distance = #{distance,jdbcType=DECIMAL},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      line_id = #{lineId,jdbcType=VARCHAR},
+      line_sort = #{lineSort,jdbcType=INTEGER},
+      delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      distance = #{distance,jdbcType=DECIMAL},
+      duration = #{duration,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

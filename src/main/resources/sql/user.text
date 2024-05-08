@@ -1,0 +1,16 @@
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '用户名称',
+  `province` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '省',
+  `city` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '市',
+  `area` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '区域',
+  `address_detail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '详细地址',
+  `longitude` decimal(20,10) NOT NULL DEFAULT '0.0000000000' COMMENT '精度',
+  `latitude` decimal(20,10) NOT NULL DEFAULT '0.0000000000' COMMENT '纬度',
+  `line_id` varchar(20) DEFAULT NULL COMMENT '临时线路ID',
+  `line_sort` int DEFAULT NULL COMMENT '线路分支序号',
+  `delivery_time` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '收货时间',
+  `distance` decimal(20,2) NOT NULL DEFAULT '0.00' COMMENT '从仓库到客户地址的路径距离，单位：米',
+  `duration` bigint NOT NULL DEFAULT '0' COMMENT '从仓库到客户地址的预计行驶时间，单位：秒',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3477 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='用户！';
